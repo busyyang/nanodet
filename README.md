@@ -66,6 +66,7 @@ First, install requirements and setup NanoDet following installation guide. Then
 ```bash
 python demo/demo.py image --config CONFIG_PATH --model MODEL_PATH --path IMAGE_PATH
 ```
+in my project, it could be:`python demo.py image --config "E:\03personal\DeepLearning\nanodet\config\nanodet-m.yml" --model "../tools/workspace/nanodet_m/model_last.pth" --path "E:\03personal\DeepLearning\data\COCO2017\val2017"`
 
 * Inference video
 

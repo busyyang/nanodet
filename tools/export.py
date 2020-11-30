@@ -3,6 +3,7 @@ import torch
 from nanodet.model.arch import build_model
 from nanodet.util import Logger, cfg, load_config, load_model_weight
 
+
 def main(config, model_path, output_path, input_shape=(320, 320)):
     logger = Logger(-1, config.save_dir, False)
     model = build_model(config.model)
@@ -12,9 +13,10 @@ def main(config, model_path, output_path, input_shape=(320, 320)):
     torch.onnx.export(model, dummy_input, output_path, verbose=True, keep_initializers_as_inputs=True, opset_version=11)
     print('finished exporting onnx ')
 
+
 if __name__ == '__main__':
-    cfg_path = r"config/nanodet-m.yml"
-    model_path = r"nanodet_m.pth"
-    out_path = r'output.onnx'
+    cfg_path = r"../config/nanodet-m.yml"  # config file with extension .yml
+    model_path = r"workspace/nanodet_m/model_last.pth" # trained model path with extension .pth
+    out_path = r'output.onnx' # the path for output file in onnx framework
     load_config(cfg, cfg_path)
     main(cfg, model_path, out_path, input_shape=(320, 320))

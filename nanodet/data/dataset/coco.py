@@ -107,13 +107,10 @@ class CocoDataset(BaseDataset):
         :param idx:
         :return: meta-data (a dict containing image, annotation and other information)
         """
-        img_info = self.get_per_img_info(idx)
+        img_info = self.data_info[idx]
         file_name = img_info['file_name']
         image_path = os.path.join(self.img_path, file_name)
         img = cv2.imread(image_path)
-        if img is None:
-            print('image {} read failed.'.format(image_path))
-            raise FileNotFoundError('Cant load image! Please check image path!')
         ann = self.get_img_annotation(idx)
         meta = dict(img=img,
                     img_info=img_info,
