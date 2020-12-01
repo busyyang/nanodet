@@ -169,9 +169,14 @@ NanoDet provide C++ and Android demo based on ncnn library.
 
     To convert NanoDet pytorch model to ncnn, you can choose this way: pytorch->onnx->ncnn
 
-    To export onnx model, run tools/export.py. Then using [onnx-simplifier](https://github.com/daquexian/onnx-simplifier) to simplify onnx structure.
+    To export onnx model, run tools/export.py. Then using [onnx-simplifier](https://github.com/daquexian/onnx-simplifier) to simplify onnx structure. (After run tool/export.py, there will be an ONNX model named `simplify_output.onnx`. It is the simplified ONNX model.)
 
     Run **onnx2ncnn** in ncnn tools to generate ncnn .param and .bin file. 
+    ~~~bash
+    > cd <path_of_simplified ONNX model>
+    > <path_of_ncnn>/tools/onnx/onnx2ncnn simplify_outout.onnx model.param model.bin
+    >
+   ~~~
     
     After that, using **ncnnoptimize** to optimize ncnn model.
 
