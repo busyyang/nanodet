@@ -3,6 +3,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 project(nanodet_demo)
 
+
 find_package(OpenMP REQUIRED)
 if(OPENMP_FOUND)
     message("OPENMP FOUND")
