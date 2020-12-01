@@ -23,13 +23,16 @@ git clone --recursive https://github.com/Tencent/ncnn.git
 ```
 Build NCNN following this tutorial: [Build for Windows x64 using VS2017](https://github.com/Tencent/ncnn/wiki/how-to-build#build-for-windows-x64-using-visual-studio-community-2017)
 
+**NOTICE: `x64 Native Tools Command Prompt` means `x64 本机工具命令提示符` in Chinese.**
+
+
 ### Step5.
 
 Modify CMakeLists.txt to your environment settings.
 
 Build project
 
-Open x64 Native Tools Command Prompt for VS 2019 or 2017
+Open x64 Native Tools Command Prompt(Chinese: `x64 本机工具命令提示符`) for VS 2019 or 2017
 
 ``` cmd
 cd <this-folder>
