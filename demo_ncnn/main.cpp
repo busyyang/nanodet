@@ -240,6 +240,7 @@ int image_demo(NanoDet &detector, const char* imagepath)
         object_rect effect_roi;
         cv::Mat resized_img;
         resize_uniform(image, resized_img, cv::Size(320, 320), effect_roi);
+
         auto results = detector.detect(resized_img, 0.4, 0.5);
         draw_bboxes(image, results, effect_roi);
         cv::waitKey(0);
@@ -329,7 +330,7 @@ int main(int argc, char** argv)
         fprintf(stderr, "usage: %s [mode] [path]. \n For webcam mode=0, path is cam id; \n For image demo, mode=1, path=xxx/xxx/*.jpg; \n For video, mode=2; \n For benchmark, mode=3 path=0.\n", argv[0]);
         return -1;
     }
-    NanoDet detector = NanoDet("./nanodet_m.param", "./nanodet_m.bin", true);
+    NanoDet detector = NanoDet("./model/nanodet_m.param", "./model/nanodet_m.bin", true);
     int mode = atoi(argv[1]);
     switch (mode)
     {

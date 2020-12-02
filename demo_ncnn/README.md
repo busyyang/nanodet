@@ -84,6 +84,11 @@ msbuild nanodet_demo.vcxproj /p:configuration=release /p:platform=x64
     det\demo_ncnn\build-vs2015\ZERO_CHECK.vcxproj]
    ~~~
     - Solution: replace `cmake -DCMAKE_GENERATOR_PLATFORM=x64 ..` to `cmake ..`. And then run `msbuild nanodet_demo.vcxproj /p:configuration=release /p:platform=x64`
+ - TOO MANY Error happened when create in Debug x64 mode.
+    - Solution1 : change the `/MDd` Debug mode to `/MD` if MD_DynamicRelease mismatch MDd_DynamicDebug
+        <div align="center"><img src="images/MDd.png"></div>
+    - Solution2 : use `opencv_world450.lib` instead of `opencv_world450d.lib` if cann't read some cv function.
+
 
 ## Linux
 
