@@ -12,6 +12,8 @@ if(OPENMP_FOUND)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
 endif()
 
+
+set(OpenCV_DIR "D:/deploy_tools/opencv/build/x64/vc14/lib")
 find_package(OpenCV REQUIRED)
 
 find_package(Vulkan REQUIRED)
@@ -19,8 +21,8 @@ message(STATUS "Vulkan FOUND = ${Vulkan_FOUND}")
 message(STATUS "Vulkan Include = ${Vulkan_INCLUDE_DIRS}")
 message(STATUS "Vulkan Lib = ${Vulkan_LIBRARY}")
 
-set(NCNN_LIBS D:/Programs/ncnn/build-vs2019/install/lib)
-set(NCNN_INCLUDE_DIRS D:/Programs/ncnn/build-vs2019/install/include)
+set(NCNN_LIBS "D:/deploy_tools/ncnn/build-vs2015/install/lib")
+set(NCNN_INCLUDE_DIRS "D:/deploy_tools/ncnn/build-vs2015/install/include")
 
 
 include_directories(

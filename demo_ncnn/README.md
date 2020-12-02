@@ -11,6 +11,17 @@ Download and Install Visual Studio from https://visualstudio.microsoft.com/vs/co
 
 ### Step2.
 Download and install OpenCV from https://github.com/opencv/opencv/releases
+rebuild source code and cut build files into `../build`
+~~~
+> cd <path_for_opencv>
+> cd build
+> cmake ..
+> cd ..
+> robocopy build ../build /s
+> rd /s /q build
+~~~
+
+set `<openCV_path>\build\x64\vc14\bin` in environment settings `PATH`.
 
 ### Step3(Optional).
 Download and install Vulkan SDK from https://vulkan.lunarg.com/sdk/home
@@ -38,9 +49,41 @@ Open x64 Native Tools Command Prompt(Chinese: `x64 本机工具命令提示符`)
 cd <this-folder>
 mkdir -p build
 cd build
-cmake ..
+cmake .. 
 msbuild nanodet_demo.vcxproj /p:configuration=release /p:platform=x64
 ```
+
+
+**Issue may happen:**
+ - Could not find "FindOpenCV.cmake" when run `cmake ..`
+     ~~~
+     CMake Error at CMakeLists.txt:15 (find_package):
+      By not providing "FindOpenCV.cmake" in CMAKE_MODULE_PATH this project has
+      asked CMake to find a package configuration file provided by "OpenCV", but
+      CMake did not find one.
+      ...
+     ~~~
+    - Solution: set a new line in CMakeList.txt: `set(OpenCV_DIR "<path for openCV>/build/x64/vc14/lib")`, where can find `OpenCVConfig.cmake`. Restart `x64 Native Tools Command Prompt` after modification.
+ - Found OpenCV Windows Pack but it has no bineries compatible with your configuration.
+      ~~~
+     You should manually point CMake variable OpenCV_DIR to your build of OpenCV library.
+    Call Stack (most recent call first):
+      CMakeLists.txt:15 (find_package)
+      ...
+     ~~~
+    - Solution: set a new line in CMakeList.txt: `set(OpenCV_DIR "<path for openCV>/build/x64/vc14/lib")`, where can find `OpenCVConfig.cmake`. Restart `x64 Native Tools Command Prompt` after modification.
+ - error MS8020: The build tools for VS 2010 cannot be fond.
+   ~~~
+    “E:\03personal\DeepLearning\nanodet\demo_ncnn\build-vs2015\nanodet_demo.vcxproj”(默认目标) (1) ->
+    “E:\03personal\DeepLearning\nanodet\demo_ncnn\build-vs2015\ZERO_CHECK.vcxproj”(默认目标) (2) ->
+    (PlatformPrepareForBuild 目标) ->
+      C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Cpp.Platform.targets(55,5): error MSB8020: The build
+     tools for Visual Studio 2010 (Platform Toolset = 'v100') cannot be found. To build using the v100 build tools, please
+    install Visual Studio 2010 build tools.  Alternatively, you may upgrade to the current Visual Studio tools by selecting
+     the Project menu or right-click the solution, and then selecting "Retarget solution". [E:\03personal\DeepLearning\nano
+    det\demo_ncnn\build-vs2015\ZERO_CHECK.vcxproj]
+   ~~~
+    - Solution: replace `cmake -DCMAKE_GENERATOR_PLATFORM=x64 ..` to `cmake ..`. And then run `msbuild nanodet_demo.vcxproj /p:configuration=release /p:platform=x64`
 
 ## Linux
 
